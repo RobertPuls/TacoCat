@@ -1,0 +1,44 @@
+.bottomMargin {
+  margin-bottom: 5%;
+}
+
+.topMargin {
+  margin-top: 5%;
+}
+
+.leftMargin {
+  margin-left: 8%;
+}
+
+#map {
+  height: 65vh;
+}
+
+.bottomPad{
+  padding-bottom: 5%;
+}
+
+.smallBottom{
+  margin-bottom: .15%;
+}
+
+img {
+  max-width: 20vw;
+  max-height: 50vh;
+}
+
+header > h1{
+  margin-bottom: 0;
+}
+
+header > h5{
+  margin-top: 0;
+}
+
+#submit {
+  margin: 10% 0;
+}
+
+#form{
+  margin-top: 2.5%;
+}

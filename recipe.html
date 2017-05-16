@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Taco Cat</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.css">
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+  <body class="amber accent-2">
+    <div class="row">
+      <header class=" center col s12 orange accent-2">
+        <h1>Taco Cat</h1>
+        <h5>Hey, Taco cat backwards is still Taco cat</h5>
+      </header>
+      <nav class="nav-extended">
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a href="index.html">Home</a></li>
+            <li class="tab"><a class="active" href="recipe.html">Recipes</a></li>
+            <li class="tab"><a href="#test3">Test 3</a></li>
+            <li class="tab"><a href="#test4">Test 4</a></li>
+            <li class="tab right"><a href="#test4">login</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <article class="container row center grey lighten-4 z-depth-3">
+      <form id="form" class="container col s3" action="index.html" method="post">
+        <label>Base</label>
+          <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        <label>seasoning</label>
+          <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        <label>Mixings</label>
+          <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        <label>Shell</label>
+          <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        <label>Condiment</label>
+          <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        <div class="col s12">
+          <a id="submit" class="waves-effect waves-light btn">button</a>
+        </div>
+      </form>
+      <img class="container responsive-img bottomMargin z-depth-3 topMargin" src="http://thecatapi.com/api/images/get?format=src&type=gif">
+    </article>
+    <article class="container center  grey lighten-4 z-depth-3 bottomMargin">
+      <section class="container" id="recipe">
+
+        <ul class="collapsible" data-collapsible="expandable">
+          <li>
+            <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+            <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+          </li>
+        </ul>
+
+        <!-- <table>
+        <thead>
+          <tr>
+              <th>Ingredient</th>
+              <th>Amount</th>
+              <th>Check</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+              <select class="browser-default">
+                <option value="" disabled selected>Choose your option</option>
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+                <option value="3">Option 3</option>
+              </select>
+            </td>
+            <td>Test</td>
+            <td>
+              <input type="checkbox" id="check"/>
+              <label class="leftMargin" for="check"></label>
+            </td>
+          </tr>
+          <tr>
+            <td>Test</td>
+            <td>Test</td>
+            <td>
+              <input type="checkbox" id="check1"/>
+              <label class="leftMargin" for="check1"></label>
+            </td>
+          </tr>
+        </tbody>
+      </table> -->
+      </section>
+    </article>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </body>
+</html>
