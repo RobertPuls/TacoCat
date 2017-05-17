@@ -5,10 +5,12 @@ var $data = $.get("https://tacos.now.sh/", function() {
   let catPicsHolder = [];
   let catPics = [];
 
-  var $catPics = $.get("http://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
+  var $catPics = $.get("https://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
     for (let i = 0; i < catPicsHolder.length; i++) {
       catPics[i] = catPicsHolder[i].children[0].innerHTML;
+
+      console.log(catPicsHolder[i].children[0].innerHTML);
 
 
       let catStatus = $.get({
@@ -19,12 +21,13 @@ var $data = $.get("https://tacos.now.sh/", function() {
         error: function(){
           console.log("not found");
         }
-      })
+      });
     }
   });
 
-  let newCatHolder = $.get("http://thecatapi.com/api/images/get?format=xml&type=gif", function() {
+  let newCatHolder = $.get("https://thecatapi.com/api/images/get?format=xml&type=gif", function() {
     let newCat = (newCatHolder.responseXML.children[0].children[0].children[0].children[0].children[0].innerHTML);
+    console.log(newCat);
     $("#index").prepend("<img class=\"container bottomMargin z-depth-3 topMargin\" src=\"" + newCat + "\">");
   });
 
