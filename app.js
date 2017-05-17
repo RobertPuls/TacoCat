@@ -9,7 +9,13 @@ var $data = $.get("https://tacos.now.sh/", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
     for (var i = 0; i < catPicsHolder.length; i++) {
       catPics[i] = catPicsHolder[i].children[0].innerHTML;
-      $("#cat").append("<img class=\"catImg col s2\" src=\"" + catPics[i] + "\">");
+      $("#cat").append("<img class=\"z-depth-3 catImg col s3\" src=\"" + catPics[i] + "\">");
+      let catStatus = $.get(catPics);
+      console.log(catStatus);
+      // if ($.get(catPics).statusText !== "ok") {
+      //   // if (!catPics) {
+      //   console.log("here");
+      // }
     }
   });
 
