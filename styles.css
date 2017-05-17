@@ -14,11 +14,11 @@
   height: 65vh;
 }
 
-.bottomPad{
+.bottomPad {
   padding-bottom: 5%;
 }
 
-.smallBottom{
+.smallBottom {
   margin-bottom: .15%;
 }
 
@@ -27,11 +27,11 @@ img {
   max-height: 50vh;
 }
 
-header > h1{
+header>h1 {
   margin-bottom: 0;
 }
 
-header > h5{
+header>h5 {
   margin-top: 0;
 }
 
@@ -39,6 +39,15 @@ header > h5{
   margin: 10% 0;
 }
 
-#form{
+#form {
   margin-top: 2.5%;
+}
+
+li.list {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#recipe {
+  padding: 2% 0;
 }
