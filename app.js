@@ -10,10 +10,8 @@ var $data = $.get("https://tacos.now.sh/", function() {
     for (let i = 0; i < catPicsHolder.length; i++) {
       catPics[i] = catPicsHolder[i].children[0].innerHTML;
 
-      console.log(catPicsHolder[i].children[0].innerHTML);
 
-
-      let catStatus = $.get({
+      $.get({
         url: catPics[i],
         success: function(){
           $("#cat").append("<img class=\"z-depth-3 catImg col s3\" src=\"" + catPics[i] + "\">");
@@ -27,7 +25,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   let newCatHolder = $.get("https://thecatapi.com/api/images/get?format=xml&type=gif", function() {
     let newCat = (newCatHolder.responseXML.children[0].children[0].children[0].children[0].children[0].innerHTML);
-    console.log(newCat);
     $("#index").prepend("<img class=\"container bottomMargin z-depth-3 topMargin\" src=\"" + newCat + "\">");
   });
 
@@ -75,26 +72,32 @@ var $data = $.get("https://tacos.now.sh/", function() {
   registerPage("cat", cat);
 
   $("select").on("change", function() {
+    let randomChoice;
     let base = "";
     let myStr = this.children;
+    let listId = this.value;
     for (var i = 0; i < myStr.length; i++) {
       if (myStr[i].selected) {
         myStr = myStr[i].innerText;
         console.log(myStr);
+        if (myStr === "Random") {
+          randomChoice = Math.floor(Math.random() * $data.responseJSON[listId].length);
+          myStr = ($data.responseJSON[listId][randomChoice].title);
+        }
       }
     }
-    let listId = this.value;
     console.log(listId);
 
 
 
     $("#" + listId)[0].innerHTML = "";
 
+
     $("#" + listId).append("<ul id=" + listId + 1 + " class=\"collapsible\" data-collapsible=\"accordion\"></ul>");
     for (let i = 0; i < $data.responseJSON[listId].length; i++) {
       if ($data.responseJSON[listId][i].title.indexOf(myStr) != -1) {
         $("#" + listId + "1").append("<li value=" + i + " id=\"test" + i + "\"><div class=\"collapsible-header\">" + $data.responseJSON[listId][i].title + "</li>");
-        $("#test" + i).append("<ul id=\"1test" + i + "\" class=\"collapsible-body\"><a value=" + i + " class=\"myBut rigth waves-effect waves-light btn\" href=\"#modal1\">Modal</a></ul>");
+        $("#test" + i).append("<ul id=\"1test" + i + "\" class=\"center collapsible-body\"><a value=" + i + " class=\"myBut rigth waves-effect waves-light btn\" href=\"#modal1\">Modal</a></ul>");
         desc = ($data.responseJSON[listId][i].description);
         $("#1test" + i).append("<li class=\"list\">" + desc + "</li>");
         for (let j = 0; j < $data.responseJSON[listId][i].ingredients.length; j++) {

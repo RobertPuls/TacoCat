@@ -29,10 +29,6 @@
       </nav>
     </div>
     <article id="index" class="page index-page bottomPad container center grey lighten-4 bottomMargin z-depth-3">
-      <!-- <section id="img" class="container grey lighten-5 bottomMargin z-depth-3"> -->
-      <!-- <img class="container bottomMargin z-depth-3 topMargin" src="http://thecatapi.com/api/images/get?format=src&type=gif"> -->
-      <!-- </section> -->
-      <!-- <img class="z-depth-3 bottomMargin" src="http://placehold.it/600x600"> -->
       <section id=map class="">
         <div class="container z-depth-3">
           <label for="mapouter"><h5 class="smallBottom">Tacos near you</h5></label>
@@ -58,13 +54,14 @@
     <!-- recipe page -->
     <article class="page recipe-page">
       <section id="" class="page recipe-page container row center grey lighten-4 z-depth-3">
-        <form id="form" class="container col s3" action="index.html" method="post">
+        <form id="form" class="container col s3 z-depth-3" action="index.html" method="post">
           <label>Base</label>
           <select id="inputList" class="browser-default">
               <option value="" disabled selected>Choose</option>
               <option value="base_layers">Chicken</option>
               <option value="base_layers">Beef</option>
               <option value="base_layers">Pork</option>
+              <option value="base_layers">Random</option>
             </select>
           <label>seasoning</label>
           <select id="inputList" class="browser-default">
@@ -72,6 +69,7 @@
               <option value="seasonings">Taco</option>
               <option value="seasonings">Rub</option>
               <option value="seasonings">Sriracha</option>
+              <option value="seasonings">Random</option>
             </select>
           <label>Mixings</label>
           <select class="browser-default">
@@ -79,6 +77,7 @@
               <option value="mixins">Corn</option>
               <option value="mixins">Mushroom</option>
               <option value="mixins">Bean</option>
+              <option value="mixins">Random</option>
             </select>
           <label>Shell</label>
           <select class="browser-default">
@@ -86,6 +85,7 @@
               <option value="shells">Corn</option>
               <option value="shells">Flower</option>
               <option value="shells">Other</option>
+              <option value="shells">Random</option>
             </select>
           <label>Condiment</label>
           <select class="browser-default">
@@ -93,10 +93,8 @@
               <option value="condiments">Salsa</option>
               <option value="condiments">Guacamole</option>
               <option value="condiments">Pico de Gallo</option>
+              <option value="condiments">Random</option>
             </select>
-          <div class="col s12">
-            <a id="submit" class="waves-effect waves-light btn">button</a>
-          </div>
         </form>
         <img id="img2" class="container responsive-img bottomMargin z-depth-3 topMargin" src="https://thecatapi.com/api/images/get?format=src&type=gif">
       </section>
@@ -126,42 +124,6 @@
               <div id="condiments" class="collapsible-body"></div>
             </li>
           </ul>
-
-          <!-- <table>
-          <thead>
-            <tr>
-                <th>Ingredient</th>
-                <th>Amount</th>
-                <th>Check</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td>
-                <select class="browser-default">
-                  <option value="" disabled selected>Choose your option</option>
-                  <option value="1">Option 1</option>
-                  <option value="2">Option 2</option>
-                  <option value="3">Option 3</option>
-                </select>
-              </td>
-              <td>Test</td>
-              <td>
-                <input type="checkbox" id="check"/>
-                <label class="leftMargin" for="check"></label>
-              </td>
-            </tr>
-            <tr>
-              <td>Test</td>
-              <td>Test</td>
-              <td>
-                <input type="checkbox" id="check1"/>
-                <label class="leftMargin" for="check1"></label>
-              </td>
-            </tr>
-          </tbody>
-        </table> -->
           <div id="modal1" class="modal">
             <div class="row modal-content">
               <h4>ingredients/Directions</h4>
