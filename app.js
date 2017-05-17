@@ -9,16 +9,14 @@ var $data = $.get("https://tacos.now.sh/", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
     for (var i = 0; i < catPicsHolder.length; i++) {
       catPics[i] = catPicsHolder[i].children[0].innerHTML;
-      console.log(catPics[i]);
-      $("#cat").append("<img class=\"col s2\" src=\"" + catPics[i] + "\">");
+      $("#cat").append("<img class=\"catImg col s2\" src=\"" + catPics[i] + "\">");
     }
   });
 
-  // for (var i = 0; i < 21; i++) {
-  //   catPics;
-  // }
-
-  $("#img2")[0].src.reload;
+  let newCatHolder = $.get("http://thecatapi.com/api/images/get?format=xml&type=gif", function() {
+    let newCat = (newCatHolder.responseXML.children[0].children[0].children[0].children[0].children[0].innerHTML);
+    $("#index").prepend("<img class=\"container bottomMargin z-depth-3 topMargin\" src=\"" + newCat + "\">");
+  });
 
   $(function() {
     showPage("index");
