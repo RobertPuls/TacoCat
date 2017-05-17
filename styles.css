@@ -51,3 +51,13 @@ li.list {
 #recipe {
   padding: 2% 0;
 }
+
+#close {
+  margin-top: -11%;
+}
+
+
+/*#modal {
+  display: flex;
+  flex-direction: column;
+}*/
