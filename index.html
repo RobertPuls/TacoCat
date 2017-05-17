@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <meta charset="utf-8">
     <title>Taco Cat</title>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="styles.css">
 
   </head>
+
   <body class="amber accent-2">
     <div class="row">
       <header class=" center col s12 orange accent-2">
@@ -15,20 +17,20 @@
         <h5>Hey, Taco cat backwards is still Taco cat</h5>
       </header>
       <nav class="nav-extended">
-    <div class="nav-content">
-      <ul class="tabs tabs-transparent">
-        <li class="tab"><a class="active" href="index.html">Home</a></li>
-        <li class="tab"><a href="recipe.html">Recipes</a></li>
-        <li class="tab"><a href="#test3">Test 3</a></li>
-        <li class="tab"><a href="#test4">Test 4</a></li>
-        <li class="tab right"><a href="#test4">login</a></li>
-      </ul>
+        <div class="nav-content">
+          <ul id="navList" class="tabs tabs-transparent">
+            <li class="tab"><a class="active page-link" data-page="index" href="#">Home</a></li>
+            <li class="tab"><a class="page-link" data-page="recipe" href="#">Recipes</a></li>
+            <li class="tab"><a class="page-link" href="#test3">Test 3</a></li>
+            <li class="tab"><a class="page-link" href="#test4">Test 4</a></li>
+            <li class="tab right"><a href="#test4">login</a></li>
+          </ul>
+        </div>
+      </nav>
     </div>
-  </nav>
-    </div>
-    <article class="bottomPad container center grey lighten-4 bottomMargin z-depth-3">
+    <article class="page index-page bottomPad container center grey lighten-4 bottomMargin z-depth-3">
       <!-- <section id="img" class="container grey lighten-5 bottomMargin z-depth-3"> -->
-        <img class="container bottomMargin z-depth-3 topMargin" src="http://thecatapi.com/api/images/get?format=src&type=gif">
+      <img class="container bottomMargin z-depth-3 topMargin" src="http://thecatapi.com/api/images/get?format=src&type=gif">
       <!-- </section> -->
       <!-- <img class="z-depth-3 bottomMargin" src="http://placehold.it/600x600"> -->
       <section id=map class="">
@@ -39,11 +41,144 @@
           <div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas" src="https://maps.google.com/maps?q=tacos+near+me &t=&z=14&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>wordpress themes by <a href="https://wpicus.com">wpicus</a>
           </div>
           <style>
-            .mapouter{overflow:hidden;height:100%;}
-            .gmap_canvas {background:none!important;height:100%;width:100%;}
+            .mapouter {
+              overflow: hidden;
+              height: 100%;
+            }
+
+            .gmap_canvas {
+              background: none!important;
+              height: 100%;
+              width: 100%;
+            }
           </style>
         </div>
       </section>
     </article>
+    <!-- recipe page -->
+    <article class="page recipe-page">
+      <section class="page recipe-page container row center grey lighten-4 z-depth-3">
+        <form id="form" class="container col s3" action="index.html" method="post">
+          <label>Base</label>
+          <select id="inputList" class="browser-default">
+              <option value="" disabled selected>Choose</option>
+              <option value="base_layers">Chicken</option>
+              <option value="base_layers">Beef</option>
+              <option value="base_layers">Pork</option>
+            </select>
+          <label>seasoning</label>
+          <select id="inputList" class="browser-default">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="seasonings">Taco</option>
+              <option value="seasonings">Rub</option>
+              <option value="seasonings">Sriracha</option>
+            </select>
+          <label>Mixings</label>
+          <select class="browser-default">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="mixins">Corn</option>
+              <option value="mixins">Mushroom</option>
+              <option value="mixins">Bean</option>
+            </select>
+          <label>Shell</label>
+          <select class="browser-default">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="shells">Corn</option>
+              <option value="shells">Flower</option>
+              <option value="shells">Other</option>
+            </select>
+          <label>Condiment</label>
+          <select class="browser-default">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="condiments">Salsa</option>
+              <option value="condiments">Guacamole</option>
+              <option value="condiments">Pico de Gallo</option>
+            </select>
+          <div class="col s12">
+            <a id="submit" class="waves-effect waves-light btn">button</a>
+          </div>
+        </form>
+        <img id="img2" class="container responsive-img bottomMargin z-depth-3 topMargin" src="http://thecatapi.com/api/images/get?format=src&type=gif">
+      </section>
+      <article class="container center  grey lighten-4 z-depth-3 bottomMargin">
+        <section class="container bottomPad topPad" id="recipe">
+
+          <ul class="collapsible" data-collapsible="expandable">
+            <li>
+              <div class="collapsible-header">Base</div>
+              <div id="base_layers" class="collapsible-body">
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Seasoning</div>
+              <div id="seasonings" class="collapsible-body"></div>
+            </li>
+            <li>
+              <div class="collapsible-header">Mixings</div>
+              <div id="mixins" class="collapsible-body"></div>
+            </li>
+            <li>
+              <div class="collapsible-header">Shell</div>
+              <div id="shells" class="collapsible-body"></div>
+            </li>
+            <li>
+              <div class="collapsible-header">Condiment</div>
+              <div id="condiments" class="collapsible-body"></div>
+            </li>
+          </ul>
+
+          <!-- <table>
+          <thead>
+            <tr>
+                <th>Ingredient</th>
+                <th>Amount</th>
+                <th>Check</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                <select class="browser-default">
+                  <option value="" disabled selected>Choose your option</option>
+                  <option value="1">Option 1</option>
+                  <option value="2">Option 2</option>
+                  <option value="3">Option 3</option>
+                </select>
+              </td>
+              <td>Test</td>
+              <td>
+                <input type="checkbox" id="check"/>
+                <label class="leftMargin" for="check"></label>
+              </td>
+            </tr>
+            <tr>
+              <td>Test</td>
+              <td>Test</td>
+              <td>
+                <input type="checkbox" id="check1"/>
+                <label class="leftMargin" for="check1"></label>
+              </td>
+            </tr>
+          </tbody>
+        </table> -->
+          <div id="modal1" class="modal">
+            <div class="row modal-content">
+              <h4>ingredients/Directions</h4>
+              <ul class="col s4" id="modalList"></ul>
+              <p class="col s8" id="modalBody"></p>
+            </div>
+            <div id="close" class="modal-footer">
+              <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+          </div>
+        </section>
+      </article>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" charset="utf-8"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+      <script src="app.js" charset="utf-8"></script>
+    </article>
+
   </body>
+
 </html>

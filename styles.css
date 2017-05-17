@@ -56,8 +56,17 @@ li.list {
   margin-top: -11%;
 }
 
+#modalList {
+  border-right: black solid 1px;
+  height: 356px;
+  overflow: scroll;
+}
+
+#modal1 {
+  overflow: hidden;
+}
+
 
 /*#modal {
-  display: flex;
-  flex-direction: column;
+  height: 100%;
 }*/

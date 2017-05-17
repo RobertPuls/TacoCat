@@ -1,8 +1,44 @@
 var $data = $.get("https://tacos.now.sh/", function() {
   console.log($data.responseJSON);
   let desc;
+  $("#img2")[0].src.reload;
 
+  $(function() {
+    showPage("index");
+  });
 
+  const pageFunctions = {};
+
+  function registerPage(name, pageFunction) {
+    pageFunctions[name] = pageFunction;
+  }
+
+  $(".page-link").click(function(event) {
+    event.preventDefault();
+    const name = this.dataset.page;
+    $(".active").removeClass("active");
+    this.classList.add("active");
+    showPage(name);
+  });
+
+  function showPage(name) {
+    $(".page").hide();
+    $("." + name + "-page").show();
+
+    pageFunctions[name]();
+  }
+
+  function index() {
+    $("h2").text("About");
+  }
+
+  registerPage("index", index);
+
+  function recipe() {
+    $("h2").text("Contact");
+  }
+
+  registerPage("recipe", recipe);
 
 
   $("select").on("change", function() {
