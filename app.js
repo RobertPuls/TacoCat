@@ -7,15 +7,19 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   var $catPics = $.get("http://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
-    for (var i = 0; i < catPicsHolder.length; i++) {
+    for (let i = 0; i < catPicsHolder.length; i++) {
       catPics[i] = catPicsHolder[i].children[0].innerHTML;
-      $("#cat").append("<img class=\"z-depth-3 catImg col s3\" src=\"" + catPics[i] + "\">");
-      let catStatus = $.get(catPics);
-      console.log(catStatus);
-      // if ($.get(catPics).statusText !== "ok") {
-      //   // if (!catPics) {
-      //   console.log("here");
-      // }
+
+
+      let catStatus = $.get({
+        url: catPics[i],
+        success: function(){
+          $("#cat").append("<img class=\"z-depth-3 catImg col s3\" src=\"" + catPics[i] + "\">");
+        },
+        error: function(){
+          console.log("not found");
+        }
+      })
     }
   });
 
