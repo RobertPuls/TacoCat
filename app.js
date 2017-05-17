@@ -1,6 +1,23 @@
 var $data = $.get("https://tacos.now.sh/", function() {
   console.log($data.responseJSON);
   let desc;
+
+  let catPicsHolder = [];
+  let catPics = [];
+
+  var $catPics = $.get("http://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
+    catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
+    for (var i = 0; i < catPicsHolder.length; i++) {
+      catPics[i] = catPicsHolder[i].children[0].innerHTML;
+      console.log(catPics[i]);
+      $("#cat").append("<img class=\"col s2\" src=\"" + catPics[i] + "\">");
+    }
+  });
+
+  // for (var i = 0; i < 21; i++) {
+  //   catPics;
+  // }
+
   $("#img2")[0].src.reload;
 
   $(function() {
@@ -29,17 +46,22 @@ var $data = $.get("https://tacos.now.sh/", function() {
   }
 
   function index() {
-    $("h2").text("About");
+    $("h2").text("index");
   }
 
   registerPage("index", index);
 
   function recipe() {
-    $("h2").text("Contact");
+    $("h2").text("recipe");
   }
 
   registerPage("recipe", recipe);
 
+  function cat() {
+    $("h2").text("cat");
+  }
+
+  registerPage("cat", cat);
 
   $("select").on("change", function() {
     let base = "";
