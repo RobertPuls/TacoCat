@@ -4,6 +4,8 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   let catPicsHolder = [];
   let catPics = [];
+  let myTacos = [];
+  let tacoCount = 0;
 
   var $catPics = $.get("https://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
@@ -13,10 +15,11 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
       $.get({
         url: catPics[i],
-        success: function(){
-          $("#cat").append("<img class=\"z-depth-3 catImg col s3\" src=\"" + catPics[i] + "\">");
+        success: function() {
+          $("#cat").append("<img class=\"z-depth-3 materialboxed catImg col s3\" src=\"" + catPics[i] + "\">");
+          $(".materialboxed").materialbox();
         },
-        error: function(){
+        error: function() {
           console.log("not found");
         }
       });
@@ -29,6 +32,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
   });
 
   $(function() {
+
     showPage("index");
   });
 
@@ -71,6 +75,12 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   registerPage("cat", cat);
 
+  function saved() {
+    $("h2").text("saved");
+  }
+
+  registerPage("saved", saved);
+
   $("select").on("change", function() {
     let randomChoice;
     let base = "";
@@ -83,6 +93,8 @@ var $data = $.get("https://tacos.now.sh/", function() {
         if (myStr === "Random") {
           randomChoice = Math.floor(Math.random() * $data.responseJSON[listId].length);
           myStr = ($data.responseJSON[listId][randomChoice].title);
+        } else if (myStr === "All") {
+          myStr = "";
         }
       }
     }
@@ -97,15 +109,32 @@ var $data = $.get("https://tacos.now.sh/", function() {
     for (let i = 0; i < $data.responseJSON[listId].length; i++) {
       if ($data.responseJSON[listId][i].title.indexOf(myStr) != -1) {
         $("#" + listId + "1").append("<li value=" + i + " id=\"test" + listId + i + "\"><div class=\"collapsible-header\">" + $data.responseJSON[listId][i].title + "</li>");
-        $("#test"+ listId + i).append("<ul id=\"1test" + listId + i + "\" class=\"center collapsible-body\"><a value=" + i + " class=\"myBut rigth waves-effect waves-light btn\" href=\"#modal1\">Modal</a></ul>");
+        $("#test" + listId + i).append("<ul id=\"1test" + listId + i + "\" class=\"center collapsible-body\"></ul>");
         desc = ($data.responseJSON[listId][i].description);
-        $("#1test"+ listId + i).append("<li class=\"center list\">" + desc + "</li>");
+        $("#1test" + listId + i).append("<li class=\"center list\">" + desc + "</li><a value=" + i + " class=\"myBut rightMargin rigth waves-effect waves-light btn topMargin\" href=\"#modal1\">Recipe</a>");
+
+        let $button = $("<a value=" + listId + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Save</a>");
+        $button.click(function() {
+          console.log("here");
+          $("#nothing").css("display", "none");
+          if (typeof(Storage) !== "undefined") {
+            // Code for localStorage/sessionStorage.
+            myTacos.push({});
+            myTacos[tacoCount];
+            tacoCount++;
+          } else {
+            // Sorry! No Web Storage support..
+          }
+        });
+
+        $("#1test" + listId + i).append($button);
         for (let j = 0; j < $data.responseJSON[listId][i].ingredients.length; j++) {
           base += ("<li>" + $data.responseJSON[listId][i].ingredients[j] + "</li>");
         }
 
       }
     }
+    $(".save").init();
     $(".modal").modal();
     $(".myBut").on("click", function() {
       console.log(this);

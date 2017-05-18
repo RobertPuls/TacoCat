@@ -3,6 +3,8 @@
 
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Taco Cat</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.css">
@@ -21,15 +23,20 @@
           <ul id="navList" class="tabs tabs-transparent">
             <li class="tab"><a class="active page-link" data-page="index" href="#">Home</a></li>
             <li class="tab"><a class="page-link" data-page="recipe" href="#">Recipes</a></li>
+            <li class="tab"><a class="page-link" data-page="saved" href="#test4">My Recipes</a></li>
             <li class="tab"><a class="page-link" data-page="cat" href="#">Cats</a></li>
-            <li class="tab"><a class="page-link" href="#test4">Test 4</a></li>
-            <li class="tab right"><a href="#test4">login</a></li>
           </ul>
         </div>
       </nav>
     </div>
-    <article id="index" class="page index-page bottomPad container center grey lighten-4 bottomMargin z-depth-3">
-      <section id=map class="">
+    <article hidden class="container center loading">
+      <img src="https://d1cm41cmeatikf.cloudfront.net/web/corp/images/taco_dancing3.gif" alt="">
+    </article>
+
+    <article class="page index-page">
+      <section id="index" class="container center grey row lighten-4 z-depth-3">
+      </section>
+      <section id="map" class="container topPad bottomPad topPad center grey lighten-4 bottomMargin z-depth-3">
         <div class="container z-depth-3">
           <label for="mapouter"><h5 class="smallBottom">Tacos near you</h5></label>
         </div>
@@ -62,6 +69,7 @@
               <option value="base_layers">Beef</option>
               <option value="base_layers">Pork</option>
               <option value="base_layers">Random</option>
+              <option value="base_layers">All</option>
             </select>
           <label>seasoning</label>
           <select id="inputList" class="browser-default">
@@ -70,6 +78,7 @@
               <option value="seasonings">Rub</option>
               <option value="seasonings">Sriracha</option>
               <option value="seasonings">Random</option>
+              <option value="seasonings">All</option>
             </select>
           <label>Mixings</label>
           <select class="browser-default">
@@ -78,6 +87,7 @@
               <option value="mixins">Mushroom</option>
               <option value="mixins">Bean</option>
               <option value="mixins">Random</option>
+              <option value="mixins">All</option>
             </select>
           <label>Shell</label>
           <select class="browser-default">
@@ -86,6 +96,7 @@
               <option value="shells">Flower</option>
               <option value="shells">Other</option>
               <option value="shells">Random</option>
+              <option value="shells">All</option>
             </select>
           <label>Condiment</label>
           <select class="browser-default">
@@ -94,6 +105,7 @@
               <option value="condiments">Guacamole</option>
               <option value="condiments">Pico de Gallo</option>
               <option value="condiments">Random</option>
+              <option value="condiments">All</option>
             </select>
         </form>
         <img id="img2" class="container bottomMargin z-depth-3 topMargin" src="https://thecatapi.com/api/images/get?format=src&type=gif">
@@ -139,6 +151,17 @@
     </article>
     <article id="cat" class="page cat-page container row center grey lighten-4 z-depth-3 pad">
 
+    </article>
+    <article class="page saved-page">
+      <section class="container row center grey lighten-4 z-depth-3">
+        <h3>Archived Recipes</h3>
+      </section>
+      <section class="container row center grey lighten-4 z-depth-3">
+        <div id="nothing" class="">
+          <h4>There's nothing here</h4>
+          <img class="catImg notImg" src="https://sites.google.com/a/providenceday.org/the-adventures-of-taco-cat/_/rsrc/1443792599781/home/pics/sad%20taco%20cat.jpg" alt="">
+        </div>
+      </section>
     </article>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" charset="utf-8"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
