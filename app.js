@@ -2,6 +2,10 @@ var $data = $.get("https://tacos.now.sh/", function() {
   function tacoSave() {
     myTacos.push(JSON.parse(JSON.stringify(tacoObj)));
     tacoCount++;
+    for (var i = 0; i < myTacos.length; i++) {
+      localStorage[i] = JSON.stringify(myTacos[i]);
+      $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
+    }
     console.log(myTacos);
   }
 
@@ -129,7 +133,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
             let layerType = (this.id.slice(this.id.indexOf(" ") + 1));
             let inLayer = $data.responseJSON[layerType][this.getAttribute("value")].title;
 
-            tacoObj[layerType] = inLayer;
+            tacoObj[layerType] = "<p>" + inLayer + "</p>";
 
             console.log(tacoObj);
 
