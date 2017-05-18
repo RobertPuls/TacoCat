@@ -113,15 +113,19 @@ var $data = $.get("https://tacos.now.sh/", function() {
         desc = ($data.responseJSON[listId][i].description);
         $("#1test" + listId + i).append("<li class=\"center list\">" + desc + "</li><a value=" + i + " class=\"myBut rightMargin rigth waves-effect waves-light btn topMargin\" href=\"#modal1\">Recipe</a>");
 
-        let $button = $("<a value=" + listId + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Save</a>");
+        let $button = $("<a id=\"taco " + listId + "\" value=" + i + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Save</a>");
         $button.click(function() {
-          console.log("here");
           $("#nothing").css("display", "none");
           if (typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
+            let layerType = (this.id.slice($button[0].id.indexOf(" ") + 1));
+            let inLayer = $data.responseJSON[layerType][this.getAttribute("value")].title;
+
             myTacos.push({});
-            myTacos[tacoCount];
-            tacoCount++;
+
+            myTacos[0][layerType] = inLayer;
+            // tacoCount++;
+            console.log(myTacos);
           } else {
             // Sorry! No Web Storage support..
           }
