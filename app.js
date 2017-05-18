@@ -1,4 +1,11 @@
 var $data = $.get("https://tacos.now.sh/", function() {
+  function tacoSave() {
+    myTacos.push(JSON.parse(JSON.stringify(tacoObj)));
+    tacoCount++;
+    console.log(myTacos);
+  }
+
+  $("#saveTaco").click(tacoSave);
   console.log($data.responseJSON);
   let desc;
 
@@ -6,6 +13,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
   let catPics = [];
   let myTacos = [];
   let tacoCount = 0;
+  let tacoObj = {};
 
   var $catPics = $.get("https://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
@@ -118,18 +126,19 @@ var $data = $.get("https://tacos.now.sh/", function() {
           $("#nothing").css("display", "none");
           if (typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
-            let layerType = (this.id.slice($button[0].id.indexOf(" ") + 1));
+            let layerType = (this.id.slice(this.id.indexOf(" ") + 1));
             let inLayer = $data.responseJSON[layerType][this.getAttribute("value")].title;
 
-            myTacos.push({});
+            tacoObj[layerType] = inLayer;
 
-            myTacos[0][layerType] = inLayer;
-            // tacoCount++;
-            console.log(myTacos);
+            console.log(tacoObj);
+
+
           } else {
             // Sorry! No Web Storage support..
           }
         });
+
 
         $("#1test" + listId + i).append($button);
         for (let j = 0; j < $data.responseJSON[listId][i].ingredients.length; j++) {
@@ -138,6 +147,10 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
       }
     }
+
+
+
+
     $(".save").init();
     $(".modal").modal();
     $(".myBut").on("click", function() {
