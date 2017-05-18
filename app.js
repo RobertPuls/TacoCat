@@ -1,10 +1,17 @@
 var $data = $.get("https://tacos.now.sh/", function() {
+  if (localStorage.length > 0) {
+    $("#nothing").hide;
+  } else if (localStorage.length === 0) {
+    $("#nothing").show;
+  }
+
   function tacoSave() {
     myTacos.push(JSON.parse(JSON.stringify(tacoObj)));
     tacoCount++;
     for (var i = 0; i < myTacos.length; i++) {
       localStorage[i] = JSON.stringify(myTacos[i]);
       $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
+
     }
     console.log(myTacos);
   }
@@ -127,7 +134,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
         let $button = $("<a id=\"taco " + listId + "\" value=" + i + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Save</a>");
         $button.click(function() {
-          $("#nothing").css("display", "none");
           if (typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
             let layerType = (this.id.slice(this.id.indexOf(" ") + 1));
