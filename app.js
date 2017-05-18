@@ -93,13 +93,13 @@ var $data = $.get("https://tacos.now.sh/", function() {
     $("#" + listId)[0].innerHTML = "";
 
 
-    $("#" + listId).append("<ul id=" + listId + 1 + " class=\"collapsible\" data-collapsible=\"accordion\"></ul>");
+    $("#" + listId).append("<ul id=" + listId + 1 + " class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
     for (let i = 0; i < $data.responseJSON[listId].length; i++) {
       if ($data.responseJSON[listId][i].title.indexOf(myStr) != -1) {
-        $("#" + listId + "1").append("<li value=" + i + " id=\"test" + i + "\"><div class=\"collapsible-header\">" + $data.responseJSON[listId][i].title + "</li>");
-        $("#test" + i).append("<ul id=\"1test" + i + "\" class=\"center collapsible-body\"><a value=" + i + " class=\"myBut rigth waves-effect waves-light btn\" href=\"#modal1\">Modal</a></ul>");
+        $("#" + listId + "1").append("<li value=" + i + " id=\"test" + listId + i + "\"><div class=\"collapsible-header\">" + $data.responseJSON[listId][i].title + "</li>");
+        $("#test"+ listId + i).append("<ul id=\"1test" + listId + i + "\" class=\"center collapsible-body\"><a value=" + i + " class=\"myBut rigth waves-effect waves-light btn\" href=\"#modal1\">Modal</a></ul>");
         desc = ($data.responseJSON[listId][i].description);
-        $("#1test" + i).append("<li class=\"list\">" + desc + "</li>");
+        $("#1test"+ listId + i).append("<li class=\"center list\">" + desc + "</li>");
         for (let j = 0; j < $data.responseJSON[listId][i].ingredients.length; j++) {
           base += ("<li>" + $data.responseJSON[listId][i].ingredients[j] + "</li>");
         }
