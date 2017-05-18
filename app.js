@@ -1,19 +1,62 @@
 var $data = $.get("https://tacos.now.sh/", function() {
+  let myTacos = [];
+  let tacoObj = {};
+  let tacoCount = 0;
+  let tacoHolder;
+
+
+
+  $("#mainList").hide();
+  console.log(localStorage.length);
   if (localStorage.length > 0) {
-    $("#nothing").hide;
+
+    // loadSave();
+
   } else if (localStorage.length === 0) {
-    $("#nothing").show;
+    $("#nothing").show();
+  }
+  // let tacoName = "my taco";
+
+  function loadSave() {
+    for (let i = 0; i < localStorage.length; i++) {
+      for (var key in JSON.parse(localStorage[i])) {
+        if (JSON.parse(localStorage[i]).hasOwnProperty(key)) {
+          tacoObj = (JSON.parse(localStorage[i])[key]);
+        }
+      }
+      // tacoObj = myTacos[i];
+      tacoSave();
+    }
   }
 
   function tacoSave() {
+    $("#nothing").hide();
+    $("#mainList").show();
     myTacos.push(JSON.parse(JSON.stringify(tacoObj)));
-    tacoCount++;
+    let tacoList = document.createElement("ul");
+
+    // $("#archive").append("<ul id=\"mainList\" class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
+    // $("#mainList").append("<ul id=" + tacoCount + " class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
+    // $("#" + tacoCount).append("<li id=\"list" + tacoCount + "\"><div class=\"collapsible-header\">" + tacoName + "</li>");
+    // $("#list" + tacoCount).append("<ul id=\"body" + tacoCount + "\" class=\"center collapsible-body\"></ul>");
+    $("#mainList").innerHTML = "";
+    $("#mainList").show();
     for (var i = 0; i < myTacos.length; i++) {
+
+      $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\"></div>");
       localStorage[i] = JSON.stringify(myTacos[i]);
-      $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
+      // $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
+
+      for (var key in myTacos[i]) {
+        if (myTacos[i].hasOwnProperty(key)) {
+          tacoList.append(JSON.parse(localStorage[i])[key]);
+          $("#" + tacoCount).append(JSON.parse(localStorage[i])[key]);
+
+        }
+      }
 
     }
-    console.log(myTacos);
+    tacoCount++;
   }
 
   $("#saveTaco").click(tacoSave);
@@ -22,9 +65,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   let catPicsHolder = [];
   let catPics = [];
-  let myTacos = [];
-  let tacoCount = 0;
-  let tacoObj = {};
 
   var $catPics = $.get("https://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
@@ -139,7 +179,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
             let layerType = (this.id.slice(this.id.indexOf(" ") + 1));
             let inLayer = $data.responseJSON[layerType][this.getAttribute("value")].title;
 
-            tacoObj[layerType] = "<p>" + inLayer + "</p>";
+            tacoObj[layerType] = inLayer;
 
             console.log(tacoObj);
 
@@ -161,7 +201,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
 
 
-    $(".save").init();
+
     $(".modal").modal();
     $(".myBut").on("click", function() {
       console.log(this);
