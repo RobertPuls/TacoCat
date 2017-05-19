@@ -116,10 +116,10 @@ h5 {
   margin-top: 0;
 }
 
-#mainList>div {
+/*#mainList>div {
   display: flex;
   ;
-}
+}*/
 
 @media (max-width: 995px) {
   #form {
@@ -144,4 +144,7 @@ h5 {
     overflow: scroll;
     font-size: 1.5em;
   }
+  /*#head{
+    position: fixed !important;
+  }*/
 }

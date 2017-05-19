@@ -1,9 +1,26 @@
 var $data = $.get("https://tacos.now.sh/", function() {
+  $(".scrollspy").scrollSpy();
   let myTacos = [];
   let tacoObj = {};
   let tacoCount = 0;
   let tacoHolder = [];
+  // var isScroll = 0;
 
+//   let options = {
+//     selector: "#waypoint",
+//     offset: 50,
+//     callback: function(el){
+//       console.log("test");
+//     }
+//   };
+//
+// Materialize.scrollFire(options);
+//
+//   function pageScroll() {
+//     console.log(isScroll);
+//       window.scrollBy(0, 1);
+//     let scrolldelay = setTimeout(pageScroll,10);
+// }
 
 
   $("#mainList").closest("ul").hide();
@@ -165,24 +182,29 @@ var $data = $.get("https://tacos.now.sh/", function() {
   }
 
   function index() {
+    // isScroll = 0;
     $("h2").text("index");
   }
 
   registerPage("index", index);
 
   function recipe() {
+    // isScroll = 0;
     $("h2").text("recipe");
   }
 
   registerPage("recipe", recipe);
 
   function cat() {
+    // pageScroll();
+    // isScroll = 1;
     $("h2").text("cat");
   }
 
   registerPage("cat", cat);
 
   function saved() {
+    // isScroll = 0;
     $("h2").text("saved");
   }
 
