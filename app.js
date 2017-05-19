@@ -135,7 +135,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   let newCatHolder = $.get("https://thecatapi.com/api/images/get?format=xml&type=gif", function() {
     let newCat = (newCatHolder.responseXML.children[0].children[0].children[0].children[0].children[0].innerHTML);
-    $("#index").prepend("<img class=\"container bottomMargin z-depth-3 topMargin\" src=\"" + newCat + "\">");
+    $("#index").prepend("<img class=\"container catGif bottomMargin z-depth-3 topMargin\" src=\"" + newCat + "\">");
   });
 
   $(function() {

@@ -37,8 +37,8 @@ img {
   object-fit: cover;
 }
 
-header>h1, {
-  margin-bottom: 0;
+header>h1 {
+  margin: 0;
 }
 
 header>h5 {
@@ -128,5 +128,20 @@ h5 {
   }
   .container {
     width: 100%;
+  }
+  .catGif {
+    width: 90%;
+  }
+  #modal1 {
+    top: 0 !important;
+    height: 100vh !important;
+    max-height: none;
+    width: 100%;
+  }
+  #modalList, #modalBody {
+    width: 100%;
+    height: 36vh;
+    overflow: scroll;
+    font-size: 1.5em;
   }
 }
