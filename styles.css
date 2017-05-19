@@ -116,11 +116,6 @@ h5 {
   margin-top: 0;
 }
 
-/*#mainList>div {
-  display: flex;
-  ;
-}*/
-
 @media (max-width: 995px) {
   #form {
     margin-left: 5%;

@@ -242,7 +242,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
         desc = ($data.responseJSON[listId][i].description);
         $("#1test" + listId + i).append("<li class=\"center list\">" + desc + "</li><a value=" + i + " class=\"myBut rightMargin rigth waves-effect waves-light btn topMargin\" href=\"#modal1\">Recipe</a>");
 
-        let $button = $("<a id=\"taco " + listId + "\" value=" + i + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Save</a>");
+        let $button = $("<a id=\"taco " + listId + "\" value=" + i + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Add</a>");
         $button.click(function() {
           if (typeof(Storage) !== "undefined") {
             // Code for localStorage/sessionStorage.
