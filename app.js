@@ -2,7 +2,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
   let myTacos = [];
   let tacoObj = {};
   let tacoCount = 0;
-  let tacoCount2 = 0;
   let tacoHolder = [];
 
 
@@ -59,7 +58,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
     // console.log("here", myTacos);
 
 
-    let tacoList = document.createElement("ul");
+    // let tacoList = document.createElement("ul");
 
 
     // $("#archive").append("<ul id=\"mainList\" class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
@@ -68,7 +67,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
     // $("#list" + tacoCount).append("<ul id=\"body" + tacoCount + "\" class=\"center collapsible-body\"></ul>");
     $("#mainList").innerHTML = "";
     $("#mainList").show();
-    $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\"></div>");
+    $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\" style=\"text-align: left;\"></div>");
 
     // for (let i = tacoCount; i < myTacos.length; i++) {
 
@@ -76,11 +75,19 @@ var $data = $.get("https://tacos.now.sh/", function() {
     console.log(localStorage[tacoCount]);
     // $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
 
-    for (var key in myTacos[0]) { //this is why it's breaking
+    let $paragraph = $("<span class=\"col s9\"></span>");
+    let keyCounter = 0;
+    for (var key in myTacos[0]) {
+      keyCounter++;
       console.log(key);
-      // if (localStorage[i].hasOwnProperty(key)) {
-      // tacoList.append(JSON.parse(localStorage[i])[key]);
-      $("#" + tacoCount).append(JSON.parse(localStorage[tacoCount])[key]);
+      let space = " ";
+      console.log(myTacos);
+      console.log((Object.keys(myTacos[0])).length);
+      if (keyCounter < (Object.keys(myTacos[0])).length) {
+        space = ", ";
+      }
+      $("#" + tacoCount).append($paragraph);
+      $paragraph.append(JSON.parse(localStorage[tacoCount])[key] + space);
       // }
     }
     let $delete = $("<a class=\"delete waves-effect waves-light btn\">delete</a>");
