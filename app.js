@@ -2,15 +2,16 @@ var $data = $.get("https://tacos.now.sh/", function() {
   let myTacos = [];
   let tacoObj = {};
   let tacoCount = 0;
-  let tacoHolder;
+  let tacoCount2 = 0;
+  let tacoHolder = [];
 
 
 
   $("#mainList").hide();
-  console.log(localStorage.length);
+  // console.log(localStorage.length);
   if (localStorage.length > 0) {
 
-    // loadSave();
+    loadSave();
 
   } else if (localStorage.length === 0) {
     $("#nothing").show();
@@ -18,13 +19,23 @@ var $data = $.get("https://tacos.now.sh/", function() {
   // let tacoName = "my taco";
 
   function loadSave() {
-    for (let i = 0; i < localStorage.length; i++) {
-      for (var key in JSON.parse(localStorage[i])) {
-        if (JSON.parse(localStorage[i]).hasOwnProperty(key)) {
-          tacoObj = (JSON.parse(localStorage[i])[key]);
-        }
+    // for (let i = 0; i < localStorage.length; i++) {
+    //   for (var key in JSON.parse(localStorage[i])) {
+    //     if (JSON.parse(localStorage[i]).hasOwnProperty(key)) {
+    //       tacoObj = (JSON.parse(localStorage[i])[key]);
+    //     }
+    //   }
+    //   // tacoObj = myTacos[i];
+    //   tacoSave();
+    // }
+    for (var i = 0; i < localStorage.length; i++) {
+      if (typeof(localStorage[i]) === "undefined") {
+        i++;
+        tacoCount++;
       }
-      // tacoObj = myTacos[i];
+      myTacos[0] = (JSON.parse(localStorage[i]));
+      console.log(tacoHolder);
+      // tacoCount++;
       tacoSave();
     }
   }
@@ -32,8 +43,24 @@ var $data = $.get("https://tacos.now.sh/", function() {
   function tacoSave() {
     $("#nothing").hide();
     $("#mainList").show();
-    myTacos.push(JSON.parse(JSON.stringify(tacoObj)));
+    if (!jQuery.isEmptyObject(tacoObj)) {
+      myTacos[0] = (JSON.parse(JSON.stringify(tacoObj)));
+      console.log(myTacos);
+    }
+    for (let i = 0; i < tacoHolder.length; i++) {
+      console.log("here");
+      // console.log("2", tacoHolder);
+      // myTacos.push(tacoHolder[i]);
+    }
+    console.log(myTacos);
+
+    // console.log("here");
+    // myTacos = [];
+    // console.log("here", myTacos);
+
+
     let tacoList = document.createElement("ul");
+
 
     // $("#archive").append("<ul id=\"mainList\" class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
     // $("#mainList").append("<ul id=" + tacoCount + " class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
@@ -41,21 +68,24 @@ var $data = $.get("https://tacos.now.sh/", function() {
     // $("#list" + tacoCount).append("<ul id=\"body" + tacoCount + "\" class=\"center collapsible-body\"></ul>");
     $("#mainList").innerHTML = "";
     $("#mainList").show();
-    for (var i = 0; i < myTacos.length; i++) {
+    $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\"></div>");
 
-      $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\"></div>");
-      localStorage[i] = JSON.stringify(myTacos[i]);
-      // $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
+    // for (let i = tacoCount; i < myTacos.length; i++) {
 
-      for (var key in myTacos[i]) {
-        if (myTacos[i].hasOwnProperty(key)) {
-          tacoList.append(JSON.parse(localStorage[i])[key]);
-          $("#" + tacoCount).append(JSON.parse(localStorage[i])[key]);
+    localStorage[tacoCount] = JSON.stringify(myTacos[0]);
+    console.log(localStorage[tacoCount]);
+    // $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
 
-        }
-      }
-
+    for (var key in myTacos[0]) { //this is why it's breaking
+      console.log(key);
+      // if (localStorage[i].hasOwnProperty(key)) {
+      // tacoList.append(JSON.parse(localStorage[i])[key]);
+      $("#" + tacoCount).append(JSON.parse(localStorage[tacoCount])[key]);
+      // }
     }
+    $("#" + tacoCount).append("<a class=\"delete waves-effect waves-light btn\">delete</a>");
+
+    // }
     tacoCount++;
   }
 
@@ -225,5 +255,14 @@ var $data = $.get("https://tacos.now.sh/", function() {
         }
       }
     });
+  });
+  $(".delete").click(function() {
+    // console.log(this.closest("div").id);
+    localStorage.removeItem(this.closest("div").id);
+    tacoCount--;
+    this.closest("div").outerHTML = "";
+    if (localStorage.length === 0) {
+      $("#nothing").show();
+    }
   });
 });
