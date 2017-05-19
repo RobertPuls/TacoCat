@@ -7,7 +7,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
 
 
-  $("#mainList").hide();
+  $("#mainList").closest("ul").hide();
   // console.log(localStorage.length);
   if (localStorage.length > 0) {
 
@@ -42,7 +42,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   function tacoSave() {
     $("#nothing").hide();
-    $("#mainList").show();
+    $("#mainList").closest("ul").show();
     if (!jQuery.isEmptyObject(tacoObj)) {
       myTacos[0] = (JSON.parse(JSON.stringify(tacoObj)));
       console.log(myTacos);
@@ -83,7 +83,18 @@ var $data = $.get("https://tacos.now.sh/", function() {
       $("#" + tacoCount).append(JSON.parse(localStorage[tacoCount])[key]);
       // }
     }
-    $("#" + tacoCount).append("<a class=\"delete waves-effect waves-light btn\">delete</a>");
+    let $delete = $("<a class=\"delete waves-effect waves-light btn\">delete</a>");
+    $delete.click(function() {
+      // console.log(this.closest("div").id);
+      localStorage.removeItem(this.closest("div").id);
+      tacoCount--;
+      this.closest("div").outerHTML = "";
+      if (localStorage.length === 0) {
+        $("#nothing").show();
+        $("#mainList").closest("ul").hide();
+      }
+    });
+    $("#" + tacoCount).append($delete);
 
     // }
     tacoCount++;
@@ -236,8 +247,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
     $(".myBut").on("click", function() {
       console.log(this);
       let idNum = (this.getAttribute("value"));
-      console.log(listId);
-      console.log(base);
       $("#modalBody").html("");
       $("#modalList").html("");
       $("#modalList").html(base);
@@ -255,14 +264,5 @@ var $data = $.get("https://tacos.now.sh/", function() {
         }
       }
     });
-  });
-  $(".delete").click(function() {
-    // console.log(this.closest("div").id);
-    localStorage.removeItem(this.closest("div").id);
-    tacoCount--;
-    this.closest("div").outerHTML = "";
-    if (localStorage.length === 0) {
-      $("#nothing").show();
-    }
   });
 });
