@@ -1,8 +1,6 @@
-var $data = $.get("https://tacos.now.sh/", function() {
-  let myTacos = [];
+let $data = $.get("https://tacos.now.sh/", function() {
   let tacoObj = {};
   let tacoCount = 0;
-  let tacoHolder = [];
 
   $("#mainList").closest("ul").hide();
   if (localStorage.length > 0) {
@@ -14,12 +12,12 @@ var $data = $.get("https://tacos.now.sh/", function() {
   }
 
   function loadSave() {
-    for (var i = 0; i < localStorage.length; i++) {
+    for (let i = 0; i < localStorage.length; i++) {
       if (typeof(localStorage[i]) === "undefined") {
         i++;
         tacoCount++;
       }
-      myTacos[0] = (JSON.parse(localStorage[i]));
+      tacoObj = (JSON.parse(localStorage[i]));
       tacoSave();
     }
   }
@@ -27,21 +25,18 @@ var $data = $.get("https://tacos.now.sh/", function() {
   function tacoSave() {
     $("#nothing").hide();
     $("#mainList").closest("ul").show();
-    if (!jQuery.isEmptyObject(tacoObj)) {
-      myTacos[0] = (JSON.parse(JSON.stringify(tacoObj)));
-    }
     $("#mainList").innerHTML = "";
     $("#mainList").show();
-    $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\" style=\"text-align: left;\"></div>");
+    $("#mainList").append(`<div id= ${tacoCount} class="collapsible-body" style="text-align: left;"></div>`);
 
-    localStorage[tacoCount] = JSON.stringify(myTacos[0]);
+    localStorage[tacoCount] = JSON.stringify(tacoObj);
 
-    let $paragraph = $("<span class=\"col s9\"></span>");
+    let $paragraph = $(`<span class="col s9"></span>`);
     let keyCounter = 0;
-    for (var key in myTacos[0]) {
+    for (let key in tacoObj) {
       keyCounter++;
       let space = " ";
-      if (keyCounter < (Object.keys(myTacos[0])).length) {
+      if (keyCounter < (Object.keys(tacoObj)).length) {
         space = ", ";
       }
       $("#" + tacoCount).append($paragraph);
@@ -69,7 +64,7 @@ var $data = $.get("https://tacos.now.sh/", function() {
   let catPicsHolder = [];
   let catPics = [];
 
-  var $catPics = $.get("https://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
+  let $catPics = $.get("https://thecatapi.com/api/images/get?format=xml&results_per_page=60", function() {
     catPicsHolder = ($catPics.responseXML.children[0].children[0].children[0].children);
     for (let i = 0; i < catPicsHolder.length; i++) {
       catPics[i] = catPicsHolder[i].children[0].innerHTML;
@@ -144,15 +139,16 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
   $("select").on("change", function() {
     let randomChoice;
-    let base = "";
+    let choice = "";
     let myStr = this.children;
     let listId = this.value;
-    for (var i = 0; i < myStr.length; i++) {
+    let recipes = $data.responseJSON[listId];
+    for (let i = 0; i < myStr.length; i++) {
       if (myStr[i].selected) {
         myStr = myStr[i].innerText;
         if (myStr === "Random") {
-          randomChoice = Math.floor(Math.random() * $data.responseJSON[listId].length);
-          myStr = ($data.responseJSON[listId][randomChoice].title);
+          randomChoice = Math.floor(Math.random() * recipes.length);
+          myStr = (recipes[randomChoice].title);
         } else if (myStr === "All") {
           myStr = "";
         }
@@ -161,12 +157,13 @@ var $data = $.get("https://tacos.now.sh/", function() {
 
     $("#" + listId)[0].innerHTML = "";
 
-    $("#" + listId).append("<ul id=" + listId + 1 + " class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
-    for (let i = 0; i < $data.responseJSON[listId].length; i++) {
-      if ($data.responseJSON[listId][i].title.indexOf(myStr) != -1) {
-        $("#" + listId + "1").append("<li value=" + i + " id=\"test" + listId + i + "\"><div class=\"collapsible-header\">" + $data.responseJSON[listId][i].title + "</li>");
+    $("#" + listId).append(`<ul id="${listId}_inner" class="center collapsible" data-collapsible="accordion"></ul>`);
+
+    for (let i = 0; i < recipes.length; i++) {
+      if (recipes[i].title.indexOf(myStr) != -1) {
+        $("#" + listId + "_inner").append("<li value=" + i + " id=\"test" + listId + i + "\"><div class=\"collapsible-header\">" + recipes[i].title + "</li>");
         $("#test" + listId + i).append("<ul id=\"1test" + listId + i + "\" class=\"center collapsible-body\"></ul>");
-        desc = ($data.responseJSON[listId][i].description);
+        desc = (recipes[i].description);
         $("#1test" + listId + i).append("<li class=\"center list\">" + desc + "</li><a value=" + i + " class=\"myBut rightMargin rigth waves-effect waves-light btn topMargin\" href=\"#modal1\">Recipe</a>");
 
         let $button = $("<a id=\"taco " + listId + "\" value=" + i + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Add</a>");
@@ -180,8 +177,8 @@ var $data = $.get("https://tacos.now.sh/", function() {
         });
 
         $("#1test" + listId + i).append($button);
-        for (let j = 0; j < $data.responseJSON[listId][i].ingredients.length; j++) {
-          base += ("<li>" + $data.responseJSON[listId][i].ingredients[j] + "</li>");
+        for (let j = 0; j < recipes[i].ingredients.length; j++) {
+          choice += ("<li>" + recipes[i].ingredients[j] + "</li>");
         }
 
       }
@@ -192,14 +189,14 @@ var $data = $.get("https://tacos.now.sh/", function() {
       let idNum = (this.getAttribute("value"));
       $("#modalBody").html("");
       $("#modalList").html("");
-      $("#modalList").html(base);
-      $("#modalBody").html($data.responseJSON[listId][idNum].directions);
+      $("#modalList").html(choice);
+      $("#modalBody").html(recipes[idNum].directions);
     });
     $(".collapsible").collapsible();
     $("#submit").on("click", function() {
-      for (var i = 0; i < $("#" + listId + "1")[0].children.length; i++) {
+      for (let i = 0; i < $("#" + listId + "1")[0].children.length; i++) {
         if ($("#" + listId + "1")[0].children[i].classList.contains("active")) {
-          $("body").append($data.responseJSON[listId][$("#" + listId + "1")[0].children[i].value].directions);
+          $("body").append(recipes[$("#" + listId + "1")[0].children[i].value].directions);
         }
       }
     });
