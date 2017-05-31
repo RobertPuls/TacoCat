@@ -1,3 +1,5 @@
+// test
+
 var $data = $.get("https://tacos.now.sh/", function() {
   $(".scrollspy").scrollSpy();
   let myTacos = [];
@@ -68,20 +70,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
       // console.log("2", tacoHolder);
       // myTacos.push(tacoHolder[i]);
     }
-    console.log(myTacos);
-
-    // console.log("here");
-    // myTacos = [];
-    // console.log("here", myTacos);
-
-
-    // let tacoList = document.createElement("ul");
-
-
-    // $("#archive").append("<ul id=\"mainList\" class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
-    // $("#mainList").append("<ul id=" + tacoCount + " class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
-    // $("#" + tacoCount).append("<li id=\"list" + tacoCount + "\"><div class=\"collapsible-header\">" + tacoName + "</li>");
-    // $("#list" + tacoCount).append("<ul id=\"body" + tacoCount + "\" class=\"center collapsible-body\"></ul>");
     $("#mainList").innerHTML = "";
     $("#mainList").show();
     $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\" style=\"text-align: left;\"></div>");
