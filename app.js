@@ -1,32 +1,10 @@
-// test
-
 var $data = $.get("https://tacos.now.sh/", function() {
-  $(".scrollspy").scrollSpy();
   let myTacos = [];
   let tacoObj = {};
   let tacoCount = 0;
   let tacoHolder = [];
-  // var isScroll = 0;
-
-//   let options = {
-//     selector: "#waypoint",
-//     offset: 50,
-//     callback: function(el){
-//       console.log("test");
-//     }
-//   };
-//
-// Materialize.scrollFire(options);
-//
-//   function pageScroll() {
-//     console.log(isScroll);
-//       window.scrollBy(0, 1);
-//     let scrolldelay = setTimeout(pageScroll,10);
-// }
-
 
   $("#mainList").closest("ul").hide();
-  // console.log(localStorage.length);
   if (localStorage.length > 0) {
 
     loadSave();
@@ -34,26 +12,14 @@ var $data = $.get("https://tacos.now.sh/", function() {
   } else if (localStorage.length === 0) {
     $("#nothing").show();
   }
-  // let tacoName = "my taco";
 
   function loadSave() {
-    // for (let i = 0; i < localStorage.length; i++) {
-    //   for (var key in JSON.parse(localStorage[i])) {
-    //     if (JSON.parse(localStorage[i]).hasOwnProperty(key)) {
-    //       tacoObj = (JSON.parse(localStorage[i])[key]);
-    //     }
-    //   }
-    //   // tacoObj = myTacos[i];
-    //   tacoSave();
-    // }
     for (var i = 0; i < localStorage.length; i++) {
       if (typeof(localStorage[i]) === "undefined") {
         i++;
         tacoCount++;
       }
       myTacos[0] = (JSON.parse(localStorage[i]));
-      console.log(tacoHolder);
-      // tacoCount++;
       tacoSave();
     }
   }
@@ -63,31 +29,18 @@ var $data = $.get("https://tacos.now.sh/", function() {
     $("#mainList").closest("ul").show();
     if (!jQuery.isEmptyObject(tacoObj)) {
       myTacos[0] = (JSON.parse(JSON.stringify(tacoObj)));
-      console.log(myTacos);
-    }
-    for (let i = 0; i < tacoHolder.length; i++) {
-      console.log("here");
-      // console.log("2", tacoHolder);
-      // myTacos.push(tacoHolder[i]);
     }
     $("#mainList").innerHTML = "";
     $("#mainList").show();
     $("#mainList").append("<div id=" + tacoCount + " class=\"collapsible-body\" style=\"text-align: left;\"></div>");
 
-    // for (let i = tacoCount; i < myTacos.length; i++) {
-
     localStorage[tacoCount] = JSON.stringify(myTacos[0]);
-    console.log(localStorage[tacoCount]);
-    // $("#archive")[0].innerHTML = JSON.parse(localStorage[i]).base_layers;
 
     let $paragraph = $("<span class=\"col s9\"></span>");
     let keyCounter = 0;
     for (var key in myTacos[0]) {
       keyCounter++;
-      console.log(key);
       let space = " ";
-      console.log(myTacos);
-      console.log((Object.keys(myTacos[0])).length);
       if (keyCounter < (Object.keys(myTacos[0])).length) {
         space = ", ";
       }
@@ -97,7 +50,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
     }
     let $delete = $("<a class=\"delete waves-effect waves-light btn\">delete</a>");
     $delete.click(function() {
-      // console.log(this.closest("div").id);
       localStorage.removeItem(this.closest("div").id);
       tacoCount--;
       this.closest("div").outerHTML = "";
@@ -108,12 +60,10 @@ var $data = $.get("https://tacos.now.sh/", function() {
     });
     $("#" + tacoCount).append($delete);
 
-    // }
     tacoCount++;
   }
 
   $("#saveTaco").click(tacoSave);
-  console.log($data.responseJSON);
   let desc;
 
   let catPicsHolder = [];
@@ -144,7 +94,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
   });
 
   $(function() {
-
     showPage("index");
   });
 
@@ -170,29 +119,24 @@ var $data = $.get("https://tacos.now.sh/", function() {
   }
 
   function index() {
-    // isScroll = 0;
     $("h2").text("index");
   }
 
   registerPage("index", index);
 
   function recipe() {
-    // isScroll = 0;
     $("h2").text("recipe");
   }
 
   registerPage("recipe", recipe);
 
   function cat() {
-    // pageScroll();
-    // isScroll = 1;
     $("h2").text("cat");
   }
 
   registerPage("cat", cat);
 
   function saved() {
-    // isScroll = 0;
     $("h2").text("saved");
   }
 
@@ -206,7 +150,6 @@ var $data = $.get("https://tacos.now.sh/", function() {
     for (var i = 0; i < myStr.length; i++) {
       if (myStr[i].selected) {
         myStr = myStr[i].innerText;
-        console.log(myStr);
         if (myStr === "Random") {
           randomChoice = Math.floor(Math.random() * $data.responseJSON[listId].length);
           myStr = ($data.responseJSON[listId][randomChoice].title);
@@ -215,12 +158,8 @@ var $data = $.get("https://tacos.now.sh/", function() {
         }
       }
     }
-    console.log(listId);
-
-
 
     $("#" + listId)[0].innerHTML = "";
-
 
     $("#" + listId).append("<ul id=" + listId + 1 + " class=\"center collapsible\" data-collapsible=\"accordion\"></ul>");
     for (let i = 0; i < $data.responseJSON[listId].length; i++) {
@@ -233,20 +172,12 @@ var $data = $.get("https://tacos.now.sh/", function() {
         let $button = $("<a id=\"taco " + listId + "\" value=" + i + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Add</a>");
         $button.click(function() {
           if (typeof(Storage) !== "undefined") {
-            // Code for localStorage/sessionStorage.
             let layerType = (this.id.slice(this.id.indexOf(" ") + 1));
             let inLayer = $data.responseJSON[layerType][this.getAttribute("value")].title;
 
             tacoObj[layerType] = inLayer;
-
-            console.log(tacoObj);
-
-
-          } else {
-            // Sorry! No Web Storage support..
           }
         });
-
 
         $("#1test" + listId + i).append($button);
         for (let j = 0; j < $data.responseJSON[listId][i].ingredients.length; j++) {
@@ -256,27 +187,18 @@ var $data = $.get("https://tacos.now.sh/", function() {
       }
     }
 
-
-
-
-
     $(".modal").modal();
     $(".myBut").on("click", function() {
-      console.log(this);
       let idNum = (this.getAttribute("value"));
       $("#modalBody").html("");
       $("#modalList").html("");
       $("#modalList").html(base);
       $("#modalBody").html($data.responseJSON[listId][idNum].directions);
-      // $("#modalBody").text($data.responseJSON[listId][idNum].directions);
-      // $("#modalBody")[0].innerText($data.responseJSON[listId][i].directions);
     });
     $(".collapsible").collapsible();
     $("#submit").on("click", function() {
-      // console.log($("#" + listId + "1")[0].children);
       for (var i = 0; i < $("#" + listId + "1")[0].children.length; i++) {
         if ($("#" + listId + "1")[0].children[i].classList.contains("active")) {
-          console.log($data.responseJSON[listId][$("#" + listId + "1")[0].children[i].value].directions);
           $("body").append($data.responseJSON[listId][$("#" + listId + "1")[0].children[i].value].directions);
         }
       }
