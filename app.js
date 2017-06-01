@@ -1,3 +1,5 @@
+$(".page").hide();
+
 let $data = $.get("https://tacos.now.sh/", function() {
   let tacoObj = {};
   let tacoCount = 0;
@@ -35,9 +37,9 @@ let $data = $.get("https://tacos.now.sh/", function() {
     let keyCounter = 0;
     for (let key in tacoObj) {
       keyCounter++;
-      let space = " ";
-      if (keyCounter < (Object.keys(tacoObj)).length) {
-        space = ", ";
+      let space = ", ";
+      if (!keyCounter < (Object.keys(tacoObj)).length) {
+        space = "";
       }
       $("#" + tacoCount).append($paragraph);
       $paragraph.append(JSON.parse(localStorage[tacoCount])[key] + space);
@@ -168,7 +170,7 @@ let $data = $.get("https://tacos.now.sh/", function() {
         $(`#${listId}_inner`).append(`<li id="${listId + i}"><div class="collapsible-header">${recipes[i].title}</li>`);
         $(`#${listId + i}`).append(`<ul id="${listId + i}_desc" class="center collapsible-body"></ul>`);
         desc = (recipes[i].description);
-        $(`#${listId + i}_desc`).append(`<li class="center list">${desc}</li><a value="${i}" class="myBut rightMargin rigth waves-effect waves-light btn topMargin" href="#modal1">Recipe</a>`);
+        $(`#${listId + i}_desc`).append(`<li class="center list">${desc}</li><a data-layer="${listId}" value="${i}" class="myBut rightMargin rigth waves-effect waves-light btn topMargin" href="#modal1">Recipe</a>`);
 
         let $button = $(`<a id="taco ${listId}" value="${i}" class="save leftMargin waves-effect waves-light btn topMargin">Add</a>`);
         $button.click(function() {
@@ -190,10 +192,11 @@ let $data = $.get("https://tacos.now.sh/", function() {
     $(".modal").modal();
     $(".myBut").on("click", function() {
       let idNum = (this.getAttribute("value"));
+      let directions = $data.responseJSON[this.dataset.layer][idNum].directions;
       $("#modalBody").html("");
       $("#modalList").html("");
       $("#modalList").html(choice);
-      $("#modalBody").html(recipes[idNum].directions);
+      $("#modalBody").html(directions);
     });
     $(".collapsible").collapsible();
   });
