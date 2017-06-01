@@ -43,7 +43,7 @@ let $data = $.get("https://tacos.now.sh/", function() {
       $paragraph.append(JSON.parse(localStorage[tacoCount])[key] + space);
       // }
     }
-    let $delete = $("<a class=\"delete waves-effect waves-light btn\">delete</a>");
+    let $delete = $(`<a class="delete waves-effect waves-light btn">delete</a>`);
     $delete.click(function() {
       localStorage.removeItem(this.closest("div").id);
       tacoCount--;
@@ -73,7 +73,7 @@ let $data = $.get("https://tacos.now.sh/", function() {
       $.get({
         url: catPics[i],
         success: function() {
-          $("#cat").append("<img class=\"z-depth-3 materialboxed catImg col s3\" src=\"" + catPics[i] + "\">");
+          $("#cat").append(`<img class="z-depth-3 materialboxed catImg col s3" src="${catPics[i]}">`);
           $(".materialboxed").materialbox();
         },
         error: function() {
@@ -85,7 +85,7 @@ let $data = $.get("https://tacos.now.sh/", function() {
 
   let newCatHolder = $.get("https://thecatapi.com/api/images/get?format=xml&type=gif", function() {
     let newCat = (newCatHolder.responseXML.children[0].children[0].children[0].children[0].children[0].innerHTML);
-    $("#index").prepend("<img class=\"container catGif bottomMargin z-depth-3 topMargin\" src=\"" + newCat + "\">");
+    $("#index").prepend(`<img class="container catGif bottomMargin z-depth-3 topMargin" src="${newCat}">`);
   });
 
   $(function() {
@@ -161,12 +161,12 @@ let $data = $.get("https://tacos.now.sh/", function() {
 
     for (let i = 0; i < recipes.length; i++) {
       if (recipes[i].title.indexOf(myStr) != -1) {
-        $("#" + listId + "_inner").append("<li value=" + i + " id=\"test" + listId + i + "\"><div class=\"collapsible-header\">" + recipes[i].title + "</li>");
-        $("#test" + listId + i).append("<ul id=\"1test" + listId + i + "\" class=\"center collapsible-body\"></ul>");
+        $(`#${listId}_inner`).append(`<li id="${listId + i}"><div class="collapsible-header">${recipes[i].title}</li>`);
+        $(`#${listId + i}`).append(`<ul id="${listId + i}_desc" class="center collapsible-body"></ul>`);
         desc = (recipes[i].description);
-        $("#1test" + listId + i).append("<li class=\"center list\">" + desc + "</li><a value=" + i + " class=\"myBut rightMargin rigth waves-effect waves-light btn topMargin\" href=\"#modal1\">Recipe</a>");
+        $(`#${listId + i}_desc`).append(`<li class="center list">${desc}</li><a value="${i}" class="myBut rightMargin rigth waves-effect waves-light btn topMargin" href="#modal1">Recipe</a>`);
 
-        let $button = $("<a id=\"taco " + listId + "\" value=" + i + " class=\"save leftMargin waves-effect waves-light btn topMargin\">Add</a>");
+        let $button = $(`<a id="taco ${listId}" value="${i}" class="save leftMargin waves-effect waves-light btn topMargin">Add</a>`);
         $button.click(function() {
           if (typeof(Storage) !== "undefined") {
             let layerType = (this.id.slice(this.id.indexOf(" ") + 1));
@@ -176,11 +176,10 @@ let $data = $.get("https://tacos.now.sh/", function() {
           }
         });
 
-        $("#1test" + listId + i).append($button);
+        $(`#${listId + i}_desc`).append($button);
         for (let j = 0; j < recipes[i].ingredients.length; j++) {
-          choice += ("<li>" + recipes[i].ingredients[j] + "</li>");
+          choice += (`<li>${recipes[i].ingredients[j]}</li>`);
         }
-
       }
     }
 
@@ -193,12 +192,5 @@ let $data = $.get("https://tacos.now.sh/", function() {
       $("#modalBody").html(recipes[idNum].directions);
     });
     $(".collapsible").collapsible();
-    $("#submit").on("click", function() {
-      for (let i = 0; i < $("#" + listId + "1")[0].children.length; i++) {
-        if ($("#" + listId + "1")[0].children[i].classList.contains("active")) {
-          $("body").append(recipes[$("#" + listId + "1")[0].children[i].value].directions);
-        }
-      }
-    });
   });
 });
