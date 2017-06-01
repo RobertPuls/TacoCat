@@ -107,8 +107,12 @@ let $data = $.get("https://tacos.now.sh/", function() {
   });
 
   function showPage(name) {
+    $("#loading").show();
     $(".page").hide();
-    $("." + name + "-page").show();
+    setTimeout(function(){
+      $("#loading").hide();
+      $("." + name + "-page").show();
+    }, 1800);
 
     pageFunctions[name]();
   }
